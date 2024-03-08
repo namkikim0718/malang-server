@@ -1,11 +1,12 @@
 package com.example.malang.controller;
 
 
-import com.example.malang.domain.Member;
+import com.example.malang.domain.member.Member;
 import com.example.malang.domain.Post;
 import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
 import com.example.malang.dto.PostResponseDTO;
+import com.example.malang.service.MemberService;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class PostController {
 
     private final PostService postService;
-    //private final MemberService memberService;
+    private final MemberService memberService;
 
 
     @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -53,7 +54,4 @@ public class PostController {
 
         return new PostDetailResponseDTO(post);
     }
-
-public class PostController {
-
 }
