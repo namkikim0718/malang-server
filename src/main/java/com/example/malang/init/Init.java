@@ -1,7 +1,6 @@
 package com.example.malang.init;
 
-
-import com.example.malang.domain.Member;
+import com.example.malang.domain.member.Member;
 import com.example.malang.repository.MemberRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +31,6 @@ public class Init {
         public void init() {
             Member member = Member.builder()
                     .name("malang")
-                    .loginId("123")
-                    .password("123")
                     .email("malng@inu.ac.kr")
                     .build();
             memberRepository.save(member);

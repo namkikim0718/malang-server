@@ -3,7 +3,7 @@ package com.example.malang.dto;
 import com.example.malang.domain.Chat;
 import com.example.malang.domain.ChatParticipation;
 import com.example.malang.domain.ChatRoom;
-import com.example.malang.domain.Member;
+import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
