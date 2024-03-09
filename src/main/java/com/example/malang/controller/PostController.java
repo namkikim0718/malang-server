@@ -54,4 +54,6 @@ public class PostController {
         return new PostDetailResponseDTO(post);
     }
 
+public class PostController {
+
 }

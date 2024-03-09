@@ -1,5 +1,6 @@
 package com.example.malang.domain;
 
+import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
