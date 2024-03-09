@@ -2,15 +2,19 @@ package com.example.malang.domain;
 
 import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Post {
 
     @Id
@@ -32,4 +36,19 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Request> requests = new ArrayList<>();
+
+    private String uploadFileName;
+
+    private String storeFileName;
+
+    public Post(String title, String content, Member member, Place place, String uploadFileName, String storeFileName) {
+        this.title = title;
+        this.content = content;
+        this.member = member;
+        this.place = place;
+        this.uploadFileName = uploadFileName;
+        this.storeFileName = storeFileName;
+    }
+
+
 }
