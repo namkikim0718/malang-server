@@ -21,10 +21,12 @@ public class Request {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
+    // 요청보낸 Member
     private Member member;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "post_id")
+    // 요청 받는 Member -> Post.Member
     private Post post;
 
     @OneToOne(mappedBy = "request", fetch = LAZY)
