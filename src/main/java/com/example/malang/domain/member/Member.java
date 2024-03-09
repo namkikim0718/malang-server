@@ -1,15 +1,25 @@
-package com.example.malang.domain;
+package com.example.malang.domain.member;
 
+import com.example.malang.domain.ChatParticipation;
+import com.example.malang.domain.Post;
+import com.example.malang.domain.Request;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
-@Getter
+@Getter @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 
     @Id
@@ -19,9 +29,7 @@ public class Member {
 
     private String name;
 
-    private String loginId;
-
-    private String password;
+    private String registrationId;
 
     private String email;
 
@@ -33,4 +41,5 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<ChatParticipation> chatParticipationList = new ArrayList<>();
+
 }
