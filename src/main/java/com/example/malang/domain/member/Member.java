@@ -29,8 +29,6 @@ public class Member {
 
     private String name;
 
-    private String registrationId;
-
     private String email;
 
     @OneToOne(mappedBy = "member", fetch = LAZY)
