@@ -6,6 +6,8 @@ import com.example.malang.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -19,5 +21,10 @@ public class MemberService {
                 .email(providerMember.getEmail())
                 .build();
         memberRepository.save(member);
+    }
+
+    public Optional<Member> findById(Long memberId) {
+
+        return memberRepository.findById(memberId);
     }
 }

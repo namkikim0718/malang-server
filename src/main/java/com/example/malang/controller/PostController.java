@@ -29,10 +29,17 @@ public class PostController {
 
 
     @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Long createPost(@PathVariable Long memberId, @RequestPart PostRequest postRequest, @RequestPart MultipartFile imageFile) throws IOException {
-        //Member member = memberService.findById(memberId);
+    public Long createPost(@PathVariable Long memberId, @RequestPart PostRequest postRequest, @RequestPart MultipartFile imageFile) {
+        Member member = memberService.findById(memberId)
+                .orElseThrow(
+                        NullPointerException::new
+                );
 
-        return postService.createPost(postRequest.getTitle(), postRequest.getContent(), postRequest.getMember(), postRequest.getPlace(), imageFile);
+        try {
+            return postService.createPost(postRequest.getTitle(), postRequest.getContent(), member, postRequest.getPlace(), imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
