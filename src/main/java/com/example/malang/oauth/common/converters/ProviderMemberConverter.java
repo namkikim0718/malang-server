@@ -6,5 +6,5 @@ package com.example.malang.oauth.common.converters;
  * @param <R> : 반환 타입
  */
 public interface ProviderMemberConverter<T,R>{
-    R converter(T t);
+    R convert(T t);
 }
