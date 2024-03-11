@@ -1,11 +1,16 @@
 package com.example.malang.controller;
 
 
-import com.example.malang.domain.Member;
+
+import com.example.malang.domain.member.Member;
+
 import com.example.malang.domain.Post;
 import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
 import com.example.malang.dto.PostResponseDTO;
+
+import com.example.malang.service.MemberService;
+
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +29,21 @@ import java.util.stream.Collectors;
 public class PostController {
 
     private final PostService postService;
-    //private final MemberService memberService;
+    private final MemberService memberService;
 
 
     @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Long createPost(@PathVariable Long memberId, @RequestPart PostRequest postRequest, @RequestPart MultipartFile imageFile) throws IOException {
-        //Member member = memberService.findById(memberId);
+    public Long createPost(@PathVariable Long memberId, @RequestPart PostRequest postRequest, @RequestPart MultipartFile imageFile) {
+        Member member = memberService.findById(memberId)
+                .orElseThrow(
+                        NullPointerException::new
+                );
 
-        return postService.createPost(postRequest.getTitle(), postRequest.getContent(), postRequest.getMember(), postRequest.getPlace(), imageFile);
+        try {
+            return postService.createPost(postRequest.getTitle(), postRequest.getContent(), member, postRequest.getPlace(), imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -53,7 +65,5 @@ public class PostController {
 
         return new PostDetailResponseDTO(post);
     }
-
-public class PostController {
 
 }

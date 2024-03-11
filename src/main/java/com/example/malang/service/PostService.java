@@ -1,6 +1,7 @@
 package com.example.malang.service;
 
-import com.example.malang.domain.Member;
+
+import com.example.malang.domain.member.Member;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.repository.PostRepository;
