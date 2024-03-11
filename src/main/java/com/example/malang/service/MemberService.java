@@ -16,7 +16,6 @@ public class MemberService {
 
     public void signIn(String registrationId , ProviderMember providerMember) {
         Member member = Member.builder()
-                .registrationId(registrationId)
                 .name(providerMember.getName())
                 .email(providerMember.getEmail())
                 .build();

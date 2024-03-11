@@ -1,12 +1,16 @@
 package com.example.malang.controller;
 
 
+
 import com.example.malang.domain.member.Member;
+
 import com.example.malang.domain.Post;
 import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
 import com.example.malang.dto.PostResponseDTO;
+
 import com.example.malang.service.MemberService;
+
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,4 +65,5 @@ public class PostController {
 
         return new PostDetailResponseDTO(post);
     }
+
 }
