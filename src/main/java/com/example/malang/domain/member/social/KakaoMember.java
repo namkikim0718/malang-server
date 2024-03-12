@@ -2,7 +2,10 @@ package com.example.malang.domain.member.social;
 
 import com.example.malang.domain.member.OAuth2ProviderMember;
 import com.example.malang.oauth.common.Attributes;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
@@ -17,23 +20,26 @@ import java.util.Map;
  */
 
 @Getter
+@Slf4j
 public class KakaoMember extends OAuth2ProviderMember {
 
     private final Map<String,Object> subAttributes;
 
     public KakaoMember(Attributes attributes, OAuth2User oAuth2User , ClientRegistration clientRegistration) {
         super(attributes.getOtherAttributes() , oAuth2User , clientRegistration);
+        log.info("KakaoMember 1 = {}" ,clientRegistration.getRegistrationId());
+        log.info("KakaoMember 2 = {}" ,clientRegistration.getClientId());
         this.subAttributes = attributes.getOtherAttributes();
     }
 
 
     @Override
     public String getId() {
-        return (String) getAttributes().get("id");
+        return (String) subAttributes.get("id");
     }
 
     @Override
     public String getName() {
-        return (String) getAttributes().get("nickname");
+        return (String) subAttributes.get("nickname");
     }
 }

@@ -1,4 +1,7 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
   security:
     oauth2:
       client:
@@ -46,3 +49,13 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+jwt:
+  secret: malangmalangmalangmalang
+  access:
+    expiration: 20
+    header : Authorization
+  refresh:
+    expiration: 30
+    header: AuthorizationRefresh
+

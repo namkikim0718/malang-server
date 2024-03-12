@@ -1,6 +1,7 @@
 package com.example.malang.oauth.common.converters;
 
 import com.example.malang.domain.member.ProviderMember;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,13 +16,12 @@ import java.util.List;
 public final class DelegatingProviderMemberConverter implements
         ProviderMemberConverter<ProviderMemberRequest , ProviderMember> {
 
-    private final List<ProviderMemberConverter<ProviderMemberRequest , ProviderMember>> converters;
+    private List<ProviderMemberConverter<ProviderMemberRequest , ProviderMember>> converters;
 
     /**
      * 생성자에서 Naver , Kakao , Google 전용 Converter 를 List 에 담고 초기화
      */
     public DelegatingProviderMemberConverter() {
-
         List<ProviderMemberConverter<ProviderMemberRequest,ProviderMember>> providerMemberConverters =
                     Arrays.asList(new OAuth2NaverProviderMemberConverter(),
                                   new OAuth2KakaoProviderMemberConverter());

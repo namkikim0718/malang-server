@@ -4,6 +4,7 @@ import com.example.malang.domain.member.Member;
 import com.example.malang.domain.member.ProviderMember;
 import com.example.malang.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void signIn(String registrationId , ProviderMember providerMember) {
         Member member = Member.builder()

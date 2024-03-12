@@ -6,7 +6,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.Collection;
 import java.util.Map;
 
+
 public record PrincipalMember(ProviderMember providerMember)implements OAuth2User {
+
     @Override
     public Map<String, Object> getAttributes() {
         return providerMember.getAttributes();
