@@ -19,5 +19,9 @@ public class PostResponseDTO {
 
     public PostResponseDTO(Post post) {
         this.id = post.getId();
+        this.title = post.getTitle();
+        this.place = post.getPlace();
+        this.uploadFileName = post.getUploadFileName();
+        this.storeFileName = post.getStoreFileName();
     }
 }
