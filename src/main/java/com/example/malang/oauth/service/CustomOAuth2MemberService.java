@@ -9,6 +9,7 @@ import com.example.malang.repository.MemberRepository;
 import com.example.malang.service.MemberService;
 import jakarta.persistence.spi.ProviderUtil;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -55,6 +56,7 @@ public class CustomOAuth2MemberService implements OAuth2UserService<OAuth2UserRe
         OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
         ProviderMemberRequest providerMemberRequest = new ProviderMemberRequest(clientRegistration,oAuth2User);
         ProviderMember providerMember = providerMember(providerMemberRequest);
+
 
         /**
          * 최동적으로 소셜 로그인의 객체인 ProviderMember 를 회원 가입 하는 로직의 파라미터로 전달합니다.

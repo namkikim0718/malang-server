@@ -1,10 +1,7 @@
 package com.example.malang.controller;
 
-
-
-import com.example.malang.domain.member.Member;
-
 import com.example.malang.domain.Post;
+import com.example.malang.domain.member.Member;
 import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
 import com.example.malang.dto.PostResponseDTO;
@@ -65,5 +62,4 @@ public class PostController {
 
         return new PostDetailResponseDTO(post);
     }
-
 }

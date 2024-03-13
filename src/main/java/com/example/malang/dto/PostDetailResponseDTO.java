@@ -1,9 +1,8 @@
 package com.example.malang.dto;
 
-
-import com.example.malang.domain.member.Member;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
+import com.example.malang.domain.member.Member;
 import lombok.*;
 
 @Getter

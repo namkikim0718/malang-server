@@ -40,4 +40,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<ChatParticipation> chatParticipationList = new ArrayList<>();
 
+    private String refreshToken;
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken.replace("Bearer ","");
+    }
+
 }
