@@ -42,7 +42,7 @@ public class PostController {
                 );
 
         try {
-            return postService.createPost(postRequest.getTitle(), postRequest.getContent(), member, postRequest.getPlace(), imageFile);
+            return postService.createPost(postRequest.getTitle(), postRequest.getContent(), member, null, imageFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
