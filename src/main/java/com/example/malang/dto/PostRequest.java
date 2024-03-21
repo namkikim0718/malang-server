@@ -12,7 +12,5 @@ public class PostRequest {
 
     private String content;
 
-    private Member member;
-
     private Place place;
 }

@@ -38,6 +38,7 @@ public class OAuth2ClientConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authorizeHttpRequests(request -> request.anyRequest().permitAll());
 //                .requestMatchers(
 //                        new AntPathRequestMatcher("/"),
@@ -52,7 +53,6 @@ public class OAuth2ClientConfig {
 
         http.sessionManagement(sessionManager -> sessionManager
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http.oauth2Login(oauth2Login -> oauth2Login.userInfoEndpoint(userInfoEndpointConfig ->
                 userInfoEndpointConfig.userService(customOAuth2MemberService)));
         http.formLogin(formLogin ->
