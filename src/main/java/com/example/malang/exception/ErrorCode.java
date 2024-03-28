@@ -25,9 +25,13 @@ public enum ErrorCode {
     /**
      * 게시글 에러
      */
-    NOT_EXIST_POST(HttpStatus.NOT_FOUND, "P001", "존재하지 않는 게시물입니다"),
+    NOT_EXIST_POST(HttpStatus.NOT_FOUND, "P001", "존재하지 않는 게시물입니다."),
     INVALID_FILE_INPUT(HttpStatus.INTERNAL_SERVER_ERROR, "P002", "올바르지 않은 파일입니다."),
 
+    /**
+     * 장소 에러
+     */
+    NOT_EXIST_PLACE(HttpStatus.NOT_FOUND, "PL001", "존재하지 않는 장소입니다."),
 
     /**
      * 일반 오류 코드
