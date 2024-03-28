@@ -15,6 +15,7 @@ import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor
 public class Post {
 

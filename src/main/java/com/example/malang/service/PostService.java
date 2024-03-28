@@ -91,7 +91,6 @@ public class PostService {
                 .female_members(postRequest.getFemale_members())
                 .build();
 
-
         Post savedPost = postRepository.save(post);
         return savedPost.getId();
     }

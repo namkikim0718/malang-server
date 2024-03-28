@@ -41,6 +41,5 @@ public class PostRequest {
         this.female_members = female_members;
         this.content = content;
     }
-
      */
 }
