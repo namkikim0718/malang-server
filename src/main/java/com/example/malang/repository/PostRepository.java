@@ -10,4 +10,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByTitle(String title);
 
     List<Post> findByPlace(Place place);
+
+    List<Post> findAllByPlaceName(String placeName);
 }
