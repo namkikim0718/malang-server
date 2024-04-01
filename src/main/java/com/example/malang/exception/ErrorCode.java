@@ -34,6 +34,11 @@ public enum ErrorCode {
     NOT_EXIST_PLACE(HttpStatus.NOT_FOUND, "PL001", "존재하지 않는 장소입니다."),
 
     /**
+     * 요청 에러
+     */
+    NOT_EXIST_REQUEST(HttpStatus.NOT_FOUND, "R001", "존재하지 않는 합석 요청입니다."),
+
+    /**
      * 일반 오류 코드
      */
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "Z002", "잘못된 요청입니다"),
