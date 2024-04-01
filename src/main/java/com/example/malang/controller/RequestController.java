@@ -37,4 +37,10 @@ public class RequestController {
     public ResponseEntity<BaseResponse<List<RequestResponseDTO>>> findAllByPost(@PathVariable("postId") Long postId) {
         return ResponseEntity.ok().body(new BaseResponse<>(requestService.findAllByPost(postId)));
     }
+
+    // 회원이 보낸 요청 목록
+    @GetMapping("/members/{memberId}/requests")
+    public ResponseEntity<BaseResponse<List<RequestResponseDTO>>> findAllByMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok().body(new BaseResponse<>(requestService.findAllByMember(memberId)));
+    }
 }

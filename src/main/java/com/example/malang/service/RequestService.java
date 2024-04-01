@@ -46,6 +46,7 @@ public class RequestService {
         Request savedPost = requestRepository.save(request);
 
         post.getRequests().add(request);
+        member.getRequests().add(request);
 
         return savedPost.getId();
     }
@@ -58,7 +59,7 @@ public class RequestService {
         return new RequestResponseDTO(request);
     }
 
-    // 게시글 요청 목록
+    // 게시글별 요청 목록
     public List<RequestResponseDTO> findAllByPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_POST));
@@ -67,4 +68,15 @@ public class RequestService {
                 .map(RequestResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
+    // 회원이 보낸 요청 목록
+    public List<RequestResponseDTO> findAllByMember(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_USER));
+        List<Request> requests = member.getRequests();
+        return requests.stream()
+                .map(RequestResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }
