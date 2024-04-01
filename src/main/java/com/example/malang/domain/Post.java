@@ -1,5 +1,6 @@
 package com.example.malang.domain;
 
+import com.example.malang.config.BaseEntity;
 import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,15 +10,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
-public class Post {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
