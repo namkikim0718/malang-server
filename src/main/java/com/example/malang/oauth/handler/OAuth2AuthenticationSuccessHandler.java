@@ -1,9 +1,6 @@
 package com.example.malang.oauth.handler;
 
 import com.example.malang.domain.member.Member;
-import com.example.malang.domain.member.OAuth2ProviderMember;
-import com.example.malang.domain.member.PrincipalMember;
-import com.example.malang.domain.member.ProviderMember;
 import com.example.malang.oauth.common.TokenMapping;
 import com.example.malang.oauth.service.JwtService;
 import com.example.malang.repository.MemberRepository;
@@ -13,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +48,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
      */
     private TokenMapping saveMember(Authentication authentication) {
 
-        PrincipalMember principalMember = (PrincipalMember) authentication.getPrincipal();
+        Member member = (Member) authentication.getPrincipal();
 
-        String email = principalMember.providerMember().getEmail();
+        String email = member.getEmail();
         TokenMapping token = jwtService.createToken(email);
 
         Member findMember = memberRepository.findByEmail(email).get();

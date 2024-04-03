@@ -13,6 +13,6 @@ public class TokenMapping {
     @Builder
     public TokenMapping(String accessToken , String refreshToken) {
         this.accessToken = accessToken;
-        this.refreshToken =refreshToken;
+        this.refreshToken = refreshToken;
     }
 }

@@ -26,6 +26,7 @@ public class JwtService {
 
     @Value("${jwt.refresh.expiration}")
     private long refreshTokenValidationSeconds;
+
     @Value("${jwt.access.header}")
     private String accessHeader;
 

@@ -1,10 +1,8 @@
 package com.example.malang.oauth.filter;
 
 import com.example.malang.domain.member.Member;
-import com.example.malang.domain.member.PrincipalMember;
-import com.example.malang.domain.member.social.ContextMember;
-import com.example.malang.domain.member.social.KakaoMember;
-import com.example.malang.oauth.common.converters.ProviderMemberRequest;
+import com.example.malang.exception.BaseException;
+import com.example.malang.exception.ErrorCode;
 import com.example.malang.oauth.service.JwtService;
 import com.example.malang.repository.MemberRepository;
 import jakarta.servlet.FilterChain;
@@ -15,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -41,9 +38,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        /**
-         *
-         */
+
         jwtService.extractAccessToken(request)
                 .filter(jwtService::isTokenValid)
                 .ifPresentOrElse(
@@ -55,20 +50,18 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private void saveAuthentication(String accessToken) {
         String email = jwtService.extractMemberEmail(accessToken);
-        Member findMember = memberRepository.findByEmail(email).get();
-
-        ContextMember contextMember = new ContextMember(findMember);
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(contextMember, null, contextMember.getAuthorities());
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(member, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     private void checkRefreshToken(HttpServletRequest request, HttpServletResponse response) {
         Optional<String> refreshToken = jwtService.extractRefreshToken(request)
                 .filter(jwtService::isTokenValid);
-
         if (refreshToken.isPresent()) {
             Member member = memberRepository.findMemberByRefreshToken(refreshToken.get())
-                    .orElseThrow(IllegalArgumentException::new);
+                    .orElseThrow(() -> new BaseException(ErrorCode.REFRESH_TOKEN_EXPIRED));
             String accessToken = jwtService.createAccessToken(member.getEmail());
             jwtService.setAccessTokenInHeader(response, accessToken);
             saveAuthentication(accessToken);
@@ -78,5 +71,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private void doNotSaveAuthentication() {
+        /**
+         * 예외처리 추가 해야합니다.
+         */
     }
 }

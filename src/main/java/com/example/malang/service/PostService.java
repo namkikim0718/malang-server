@@ -68,7 +68,7 @@ public class PostService {
         amazonS3Client.putObject(bucket, storeFileName, imageFile.getInputStream(), metadata);
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_USER));
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
 
 
         Place place = Place.builder()

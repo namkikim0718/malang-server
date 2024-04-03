@@ -32,7 +32,7 @@ public class RequestService {
     public Long createRequest(Long memberId, Long postId, RequestRequest requestRequest) {
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_USER));
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
 
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_POST));
@@ -72,7 +72,7 @@ public class RequestService {
     // 회원이 보낸 요청 목록
     public List<RequestResponseDTO> findAllByMember(Long memberId) {
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_USER));
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
         List<Request> requests = member.getRequests();
         return requests.stream()
                 .map(RequestResponseDTO::new)

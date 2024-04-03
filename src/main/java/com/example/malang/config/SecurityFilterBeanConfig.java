@@ -17,13 +17,9 @@ public class SecurityFilterBeanConfig {
 
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
+
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
         return new JwtAuthorizationFilter(jwtService, memberRepository);
     }
-
-//    @Bean
-//    public JwtProviderHandler jwtProviderHandler() {
-//        return new JwtProviderHandler(jwtService, memberRepository);
-//    }
 }
