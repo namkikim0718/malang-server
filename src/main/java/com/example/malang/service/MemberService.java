@@ -1,10 +1,8 @@
 package com.example.malang.service;
 
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.MemberRequestDto;
-import com.example.malang.dto.MemberResponseDto;
-import com.example.malang.oauth.common.TokenMapping;
-import com.example.malang.oauth.service.JwtService;
+import com.example.malang.jwt.JwtService;
+import com.example.malang.jwt.TokenMapping;
 import com.example.malang.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.example.malang.dto;
 
-import com.example.malang.oauth.common.TokenMapping;
+import com.example.malang.jwt.TokenMapping;
 import lombok.Builder;
 import lombok.Getter;
 

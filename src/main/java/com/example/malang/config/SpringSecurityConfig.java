@@ -1,8 +1,7 @@
 package com.example.malang.config;
 
-import com.example.malang.oauth.filter.JwtAuthorizationFilter;
-import com.example.malang.oauth.service.JwtService;
-import com.example.malang.repository.MemberRepository;
+
+import com.example.malang.jwt.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

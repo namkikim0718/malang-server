@@ -1,9 +1,8 @@
-package com.example.malang.oauth.filter;
+package com.example.malang.jwt;
 
 import com.example.malang.domain.member.Member;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
-import com.example.malang.oauth.service.JwtService;
 import com.example.malang.repository.MemberRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
