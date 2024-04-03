@@ -1,5 +1,6 @@
 package com.example.malang.controller;
 
+import com.example.malang.config.BaseResponse;
 import com.example.malang.dto.MemberRequestDto;
 import com.example.malang.dto.MemberResponseDto;
 import com.example.malang.service.MemberService;
@@ -23,9 +24,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members/sign-up")
-    public ResponseEntity<LoginAuthenticationMember> signUp(@RequestBody OauthLoginMember oAuthLoginMember) {
-        return ResponseEntity.ok().body(memberService.signUp(oAuthLoginMember));
+    public ResponseEntity<BaseResponse<LoginAuthenticationMember>> signUp(@RequestBody OauthLoginMember oAuthLoginMember) {
+        return ResponseEntity.ok().body(new BaseResponse<>(memberService.signUp(oAuthLoginMember)));
     }
-
 
 }

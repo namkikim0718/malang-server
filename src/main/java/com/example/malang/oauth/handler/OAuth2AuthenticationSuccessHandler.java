@@ -17,6 +17,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 
+/**
+ * 해당 클래스 삭제 예정
+ */
 @Component
 @Slf4j
 @RequiredArgsConstructor

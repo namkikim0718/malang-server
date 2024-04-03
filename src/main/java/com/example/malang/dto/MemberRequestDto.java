@@ -12,7 +12,7 @@ public class MemberRequestDto {
          * 필드가 1개만 있을 경우 POSTMAN 오류가 발생해서 userId 로 일단 필드 2개 유지합니다.
          */
         private String email;
-        private String dummyData;
+        private String memberName;
     }
 
 

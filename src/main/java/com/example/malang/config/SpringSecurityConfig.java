@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @Configuration
@@ -20,7 +21,12 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(request -> request.anyRequest().permitAll());
+        http.authorizeHttpRequests(request -> request.requestMatchers(
+                // root 는 우선 개방?
+                new AntPathRequestMatcher("/api/v1/"),
+                // 회원 가입은 permitAll
+                new AntPathRequestMatcher("/api/v1//members/sign-up")
+                ).permitAll());
         http.sessionManagement(sessionManager -> sessionManager
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

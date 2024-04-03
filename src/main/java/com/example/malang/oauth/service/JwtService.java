@@ -3,9 +3,12 @@ package com.example.malang.oauth.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.malang.oauth.common.TokenMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +63,7 @@ public class JwtService {
     public String createRefreshToken() {
         return JWT.create()
                 .withSubject("RefreshToken")
-                .withExpiresAt(new Date(System.currentTimeMillis()+accessTokenValidationSeconds+1000))
+                .withExpiresAt(new Date(System.currentTimeMillis()+refreshTokenValidationSeconds+1000))
                 .sign(Algorithm.HMAC512(secret));
     }
 
