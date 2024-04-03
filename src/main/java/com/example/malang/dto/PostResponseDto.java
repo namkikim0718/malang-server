@@ -6,7 +6,7 @@ import lombok.Getter;
 
 public class PostResponseDto {
 
-    @Getter @Builder
+    @Getter
     public static class PostDetailResponseDTO {
 
         private Long id;
@@ -43,7 +43,7 @@ public class PostResponseDto {
         }
     }
 
-    @Builder @Getter
+    @Getter
     public static class PostListResponseDTO {
 
         private Long id;

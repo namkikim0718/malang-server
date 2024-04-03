@@ -1,8 +1,8 @@
 package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
-import com.example.malang.dto.PostRequest;
 
+import com.example.malang.dto.PostRequestDto;
 import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class PostController {
 
     // 게시글 생성
     @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId, @RequestPart("postRequest") PostRequest postRequest, @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
+    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId, @RequestPart("postRequest") PostRequestDto.PostRequest postRequest, @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
             return ResponseEntity.ok().body(new BaseResponse<>(postService.createPost(memberId, postRequest, imageFile)));
     }
 

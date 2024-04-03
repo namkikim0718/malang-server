@@ -5,7 +5,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.PostRequest;
+import com.example.malang.dto.PostRequestDto;
 import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
@@ -51,7 +51,7 @@ public class PostService {
     }
 
     @Transactional
-    public Long createPost(Long memberId, PostRequest postRequest, MultipartFile imageFile) throws IOException {
+    public Long createPost(Long memberId, PostRequestDto.PostRequest postRequest, MultipartFile imageFile) throws IOException {
         //파일의 원본 이름
         String originalFileName = imageFile.getOriginalFilename();
         //DB에 저장될 파일 이름

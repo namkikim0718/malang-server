@@ -1,12 +1,11 @@
 package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
-import com.example.malang.dto.PlaceResponseDTO;
+import com.example.malang.dto.PlaceResponseDto;
 import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class PlaceController {
 
     // 장소 정보 조회
     @GetMapping("/places/{placeId}")
-    public ResponseEntity<BaseResponse<PlaceResponseDTO>> findPlaceById(@PathVariable("placeId") Long placeId) {
+    public ResponseEntity<BaseResponse<PlaceResponseDto.PlaceResponse>> findPlaceById(@PathVariable("placeId") Long placeId) {
         return ResponseEntity.ok().body(new BaseResponse<>(placeService.convertToDTO(placeId)));
     }
 
