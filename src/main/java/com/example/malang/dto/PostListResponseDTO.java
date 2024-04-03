@@ -1,26 +1,25 @@
 package com.example.malang.dto;
 
-import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostResponseDTO {
+public class PostListResponseDTO {
     private Long id;
 
     private String title;
 
-    private Place place;
+    private String placeName;
 
     private String uploadFileName;
 
     private String storeFileName;
 
-    public PostResponseDTO(Post post) {
+    public PostListResponseDTO(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
-        this.place = post.getPlace();
+        this.placeName = post.getPlace().getName();
         this.uploadFileName = post.getUploadFileName();
         this.storeFileName = post.getStoreFileName();
     }

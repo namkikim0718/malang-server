@@ -1,5 +1,6 @@
 package com.example.malang.domain;
 
+import com.example.malang.config.BaseEntity;
 import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -9,15 +10,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
-public class Post {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +26,12 @@ public class Post {
     private String title;
 
     private String content;
+
+    private int age;
+
+    private int male_members;
+
+    private int female_members;
 
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
@@ -46,13 +51,16 @@ public class Post {
     private String storeFileName;
 
     @Builder
-    public Post(String title, String content, Member member, Place place, String uploadFileName, String storeFileName) {
+    public Post(String title, String content, Member member, Place place, String uploadFileName, String storeFileName, int age, int male_members, int female_members) {
         this.title = title;
         this.content = content;
         this.member = member;
         this.place = place;
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
+        this.age = age;
+        this.male_members = male_members;
+        this.female_members = female_members;
     }
 
 

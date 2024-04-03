@@ -1,14 +1,19 @@
 package com.example.malang.domain;
 
+import com.example.malang.config.BaseEntity;
 import com.example.malang.domain.member.Member;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
-public class Request {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Request extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +37,12 @@ public class Request {
 
     @OneToOne(mappedBy = "request", fetch = LAZY)
     private ChatRoom chatRoom;
+
+    @Builder
+    public Request(String message, Member member, Post post) {
+        this.message = message;
+        this.status = RequestStatus.WAIT;
+        this.member = member;
+        this.post = post;
+    }
 }

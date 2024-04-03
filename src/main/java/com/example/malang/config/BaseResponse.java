@@ -15,7 +15,7 @@ import static com.example.malang.exception.ErrorCode.SUCCESS;
 @JsonPropertyOrder({"time", "status", "code", "message", "result"})
 public class BaseResponse<T> {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm::ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private final LocalDateTime time = LocalDateTime.now();
     private final HttpStatus status;
     private final String code;
@@ -27,7 +27,7 @@ public class BaseResponse<T> {
     public BaseResponse(T result) {
         this.status = SUCCESS.getStatus();
         this.code = SUCCESS.getCode();
-        this.message = SUCCESS.getCode();
+        this.message = SUCCESS.getMessage();
         this.result = result;
     }
 
