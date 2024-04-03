@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.malang.exception.BaseException;
+import com.example.malang.exception.ErrorCode;
 import com.example.malang.oauth.common.TokenMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -130,9 +132,7 @@ public class JwtService {
                     .verify(token);
             return true;
         } catch (JWTVerificationException ex) {
-            return false;
+            throw new BaseException(ErrorCode.TOKEN_NOT_VALID);
         }
     }
-
-
 }

@@ -22,10 +22,11 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request.requestMatchers(
-                // root 는 우선 개방?
-                new AntPathRequestMatcher("/api/v1/"),
-                // 회원 가입은 permitAll
-                new AntPathRequestMatcher("/api/v1//members/sign-up")
+                /**
+                 * Filter 에서 검증하기 때문에 모든 API 허용해도 상관 없습니다.
+                 * 토큰 검증이 되지 않으면 403 오류가 발생합니다.
+                 */
+                new AntPathRequestMatcher("/**")
                 ).permitAll());
         http.sessionManagement(sessionManager -> sessionManager
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

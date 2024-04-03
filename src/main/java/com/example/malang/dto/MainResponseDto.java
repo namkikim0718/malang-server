@@ -6,14 +6,16 @@ import lombok.Getter;
 
 import java.util.List;
 
+import static com.example.malang.dto.PostResponseDto.*;
+
 public class MainResponseDto {
 
     @Getter @Builder
     public static class MainRequiredInfo {
         private String memberName;
-        private List<PostResponseDto.PostListResponseDTO> postAll;
+        private List<PostListResponseDTO> postAll;
 
-        public static MainRequiredInfo toDto(String name, List<PostResponseDto.PostListResponseDTO> posts) {
+        public static MainRequiredInfo toDto(String name, List<PostListResponseDTO> posts) {
             return MainRequiredInfo.builder()
                     .memberName(name)
                     .postAll(posts)

@@ -21,10 +21,10 @@ spring:
 jwt:
   secret: malangmalangmalangmalang
   access:
-    expiration: 20000
+    expiration: 31536000
     header : Authorization
   refresh:
-    expiration: 30000
+    expiration: 31536000
     header: AuthorizationRefresh
 
 cloud:

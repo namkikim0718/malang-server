@@ -24,7 +24,10 @@ public enum ErrorCode {
     /**
      * 토큰 에러
      */
-    REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED , "T001" , "리프레쉬 토큰이 만료됐습니다."),
+
+
+    TOKEN_NOT_VALID(HttpStatus.FORBIDDEN , "T001" , "토큰이 유효하지 않습니다."),
+    REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED , "T002" , "리프레쉬 토큰이 만료됐습니다."),
 
 
     /**

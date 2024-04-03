@@ -24,6 +24,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.example.malang.dto.PostResponseDto.*;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -50,6 +52,10 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
+    /**
+     * 코드 리팩토링
+     * 서비스에서 builder 로 만들지 말고 from() 같은 메서드 만들어서 거기 안에서 builder 로 만드세요
+     */
     @Transactional
     public Long createPost(Long memberId, PostRequestDto.PostRequest postRequest, MultipartFile imageFile) throws IOException {
         //파일의 원본 이름
@@ -68,7 +74,6 @@ public class PostService {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
-
 
         Place place = Place.builder()
                 .name(postRequest.getPlaceName())
@@ -95,19 +100,19 @@ public class PostService {
     }
 
     // 리스트 조회
-    public List<PostResponseDto.PostListResponseDTO> findAllPost() {
+    public List<PostListResponseDTO> findAllPost() {
         List<Post> posts = postRepository.findAll();
         return posts.stream()
-                .map(PostResponseDto.PostListResponseDTO::new)
+                .map(PostListResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     // 단건 조회
-    public PostResponseDto.PostDetailResponseDTO findPostById(Long postId) {
+    public PostDetailResponseDTO findPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_POST));
 
-        return new PostResponseDto.PostDetailResponseDTO(post);
+        return new PostDetailResponseDTO(post);
     }
 
     /**
