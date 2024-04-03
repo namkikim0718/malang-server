@@ -34,6 +34,12 @@ public class MemberController {
         return ResponseEntity.ok().body(new BaseResponse<>(memberService.getMyPage(memberId)));
     }
 
-
-
+    /**
+     * MyPage -> 내가 작성한 게시글
+     */
+    // TODO 여기서부터 시작!
+    @GetMapping("/members/{member-id}/my-page/my-post")
+    public ResponseEntity<BaseResponse<MyPage>> getMyPageForMyPost(@PathVariable("member-id") Long memberId) {
+        return ResponseEntity.ok().body(new BaseResponse<>(memberService.getMyPage(memberId)));
+    }
 }
