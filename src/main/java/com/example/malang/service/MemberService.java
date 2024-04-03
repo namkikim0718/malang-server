@@ -1,6 +1,9 @@
 package com.example.malang.service;
 
 import com.example.malang.domain.member.Member;
+import com.example.malang.dto.MemberResponseDto;
+import com.example.malang.exception.BaseException;
+import com.example.malang.exception.ErrorCode;
 import com.example.malang.jwt.JwtService;
 import com.example.malang.jwt.TokenMapping;
 import com.example.malang.repository.MemberRepository;
@@ -25,6 +28,12 @@ public class MemberService {
         Member member = memberRepository.save(Member.from(oAuthLoginMember));
         TokenMapping tokenMapping = getToken(member);
         return LoginAuthenticationMember.from(tokenMapping,member.getId());
+    }
+
+    public MyPage getMyPage(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
+        return MyPage.to(member.getId() , member.getName() , member.getEmail());
     }
 
     /**

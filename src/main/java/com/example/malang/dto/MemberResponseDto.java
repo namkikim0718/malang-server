@@ -18,4 +18,21 @@ public class MemberResponseDto {
                     .build();
         }
     }
+
+    @Getter @Builder
+    public static class MyPage {
+        private Long memberId;
+        private String memberName;
+        private String email;
+
+        public static MyPage to(Long memberId , String memberName , String email) {
+            return MyPage.builder()
+                    .memberId(memberId)
+                    .email(email)
+                    .memberName(memberName)
+                    .build();
+        }
+
+
+    }
 }
