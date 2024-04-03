@@ -2,7 +2,7 @@ package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
 import com.example.malang.dto.PlaceResponseDTO;
-import com.example.malang.dto.PostListResponseDTO;
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class PlaceController {
 
     // 장소별 게시물 조회
     @GetMapping("/postsByPlace")
-    public ResponseEntity<BaseResponse<List<PostListResponseDTO>>> findAllPostByPlaceName(@RequestParam("placeName") String placeName) {
+    public ResponseEntity<BaseResponse<List<PostResponseDto.PostListResponseDTO>>> findAllPostByPlaceName(@RequestParam("placeName") String placeName) {
         return ResponseEntity.ok().body(new BaseResponse<>(placeService.findPostByPlaceName(placeName)));
     }
 }

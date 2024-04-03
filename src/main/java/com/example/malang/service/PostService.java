@@ -5,9 +5,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
-import com.example.malang.dto.PostListResponseDTO;
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.repository.MemberRepository;
@@ -96,19 +95,19 @@ public class PostService {
     }
 
     // 리스트 조회
-    public List<PostListResponseDTO> findAllPost() {
+    public List<PostResponseDto.PostListResponseDTO> findAllPost() {
         List<Post> posts = postRepository.findAll();
         return posts.stream()
-                .map(PostListResponseDTO::new)
+                .map(PostResponseDto.PostListResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     // 단건 조회
-    public PostDetailResponseDTO findPostById(Long postId) {
+    public PostResponseDto.PostDetailResponseDTO findPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_POST));
 
-        return new PostDetailResponseDTO(post);
+        return new PostResponseDto.PostDetailResponseDTO(post);
     }
 
     /**

@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.malang.dto.MemberRequestDto.*;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -46,7 +47,7 @@ public class Member {
     /**
      * 생성 메서드
      */
-    public static Member from(MemberRequestDto.OAuthLoginMember oAuthLoginMember) {
+    public static Member from(OauthLoginMember oAuthLoginMember) {
         return Member.builder()
                 .email(oAuthLoginMember.getEmail())
                 .build();

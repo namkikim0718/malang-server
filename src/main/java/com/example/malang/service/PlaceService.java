@@ -3,7 +3,7 @@ package com.example.malang.service;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.dto.PlaceResponseDTO;
-import com.example.malang.dto.PostListResponseDTO;
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.repository.PlaceRepository;
@@ -31,10 +31,10 @@ public class PlaceService {
         return new PlaceResponseDTO(place);
     }
 
-    public List<PostListResponseDTO> findPostByPlaceName(String placeName) {
+    public List<PostResponseDto.PostListResponseDTO> findPostByPlaceName(String placeName) {
         List<Post> posts = postRepository.findAllByPlaceName(placeName);
         return posts.stream()
-                .map(PostListResponseDTO::new)
+                .map(PostResponseDto.PostListResponseDTO::new)
                 .collect(Collectors.toList());
     }
 }

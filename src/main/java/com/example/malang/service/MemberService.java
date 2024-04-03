@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.example.malang.dto.MemberRequestDto.*;
+import static com.example.malang.dto.MemberResponseDto.*;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -20,10 +23,10 @@ public class MemberService {
 
 
     @Transactional
-    public MemberResponseDto.LoginAuthenticationMember signUp(MemberRequestDto.OAuthLoginMember oAuthLoginMember) {
+    public LoginAuthenticationMember signUp(OauthLoginMember oAuthLoginMember) {
         Member member = memberRepository.save(Member.from(oAuthLoginMember));
         TokenMapping tokenMapping = getToken(member);
-        return MemberResponseDto.LoginAuthenticationMember.from(tokenMapping,member.getId());
+        return LoginAuthenticationMember.from(tokenMapping,member.getId());
     }
 
     /**
@@ -34,6 +37,7 @@ public class MemberService {
         String email = member.getEmail();
         /**
          * createToken() 에서 반환된 TokenMapping 의 토큰은 모두 "Bearer " 의 포맷을 가진다.
+         * -------> 하지만 요청 헤더에 담아서 넣는게 아니니까 그냥 "TOKEN_VALUE" 형식으로 return
          */
         TokenMapping token = jwtService.createToken(email);
         member.updateRefreshToken(token.getRefreshToken());

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.malang.dto.MemberRequestDto.*;
+import static com.example.malang.dto.MemberResponseDto.*;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
@@ -20,7 +23,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members/sign-up")
-    public ResponseEntity<MemberResponseDto.LoginAuthenticationMember> signUp(@RequestBody MemberRequestDto.OAuthLoginMember oAuthLoginMember) {
+    public ResponseEntity<LoginAuthenticationMember> signUp(@RequestBody OauthLoginMember oAuthLoginMember) {
         return ResponseEntity.ok().body(memberService.signUp(oAuthLoginMember));
     }
 

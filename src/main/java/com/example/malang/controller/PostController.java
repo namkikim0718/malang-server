@@ -1,10 +1,9 @@
 package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
-import com.example.malang.dto.PostDetailResponseDTO;
 import com.example.malang.dto.PostRequest;
-import com.example.malang.dto.PostListResponseDTO;
 
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,14 +33,14 @@ public class PostController {
 
     // 게시글 리스트 조회
     @GetMapping("/posts")
-    public ResponseEntity<BaseResponse<List<PostListResponseDTO>>> findAll() {
+    public ResponseEntity<BaseResponse<List<PostResponseDto.PostListResponseDTO>>> findAll() {
         return ResponseEntity.ok().body(new BaseResponse<>(postService.findAllPost()));
     }
 
 
     // 게시글 단건 조회
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<BaseResponse<PostDetailResponseDTO>> findById(@PathVariable("postId") Long postId) {
+    public ResponseEntity<BaseResponse<PostResponseDto.PostDetailResponseDTO>> findById(@PathVariable("postId") Long postId) {
         return ResponseEntity.ok().body(new BaseResponse<>(postService.findPostById(postId)));
     }
 

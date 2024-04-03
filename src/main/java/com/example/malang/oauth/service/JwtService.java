@@ -50,18 +50,18 @@ public class JwtService {
      * RefreshToken 도 같은 맥락입니다.
      */
     public String createAccessToken(String subject) {
-        return PREFIX.concat(JWT.create()
+        return JWT.create()
                 .withSubject("AccessToken")
                 .withExpiresAt(new Date(System.currentTimeMillis()+accessTokenValidationSeconds+1000))
                 .withClaim("subject",subject)
-                .sign(Algorithm.HMAC512(secret)));
+                .sign(Algorithm.HMAC512(secret));
     }
 
     public String createRefreshToken() {
-        return PREFIX.concat(JWT.create()
+        return JWT.create()
                 .withSubject("RefreshToken")
                 .withExpiresAt(new Date(System.currentTimeMillis()+accessTokenValidationSeconds+1000))
-                .sign(Algorithm.HMAC512(secret)));
+                .sign(Algorithm.HMAC512(secret));
     }
 
     /**
