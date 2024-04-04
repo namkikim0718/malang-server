@@ -1,8 +1,7 @@
-package com.example.malang.oauth.common;
+package com.example.malang.jwt;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 public class TokenMapping {
@@ -13,6 +12,6 @@ public class TokenMapping {
     @Builder
     public TokenMapping(String accessToken , String refreshToken) {
         this.accessToken = accessToken;
-        this.refreshToken =refreshToken;
+        this.refreshToken = refreshToken;
     }
 }

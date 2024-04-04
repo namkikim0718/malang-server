@@ -1,9 +1,10 @@
-package com.example.malang.oauth.service;
+package com.example.malang.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.malang.oauth.common.TokenMapping;
+import com.example.malang.exception.BaseException;
+import com.example.malang.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,7 @@ public class JwtService {
 
     @Value("${jwt.refresh.expiration}")
     private long refreshTokenValidationSeconds;
+
     @Value("${jwt.access.header}")
     private String accessHeader;
 
@@ -49,18 +51,18 @@ public class JwtService {
      * RefreshToken 도 같은 맥락입니다.
      */
     public String createAccessToken(String subject) {
-        return PREFIX.concat(JWT.create()
+        return JWT.create()
                 .withSubject("AccessToken")
                 .withExpiresAt(new Date(System.currentTimeMillis()+accessTokenValidationSeconds+1000))
                 .withClaim("subject",subject)
-                .sign(Algorithm.HMAC512(secret)));
+                .sign(Algorithm.HMAC512(secret));
     }
 
     public String createRefreshToken() {
-        return PREFIX.concat(JWT.create()
+        return JWT.create()
                 .withSubject("RefreshToken")
-                .withExpiresAt(new Date(System.currentTimeMillis()+accessTokenValidationSeconds+1000))
-                .sign(Algorithm.HMAC512(secret)));
+                .withExpiresAt(new Date(System.currentTimeMillis()+refreshTokenValidationSeconds+1000))
+                .sign(Algorithm.HMAC512(secret));
     }
 
     /**
@@ -126,9 +128,7 @@ public class JwtService {
                     .verify(token);
             return true;
         } catch (JWTVerificationException ex) {
-            return false;
+            throw new BaseException(ErrorCode.TOKEN_NOT_VALID);
         }
     }
-
-
 }

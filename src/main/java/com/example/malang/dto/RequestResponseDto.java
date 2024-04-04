@@ -1,18 +1,12 @@
 package com.example.malang.dto;
 
-import com.example.malang.domain.ChatRoom;
-import com.example.malang.domain.Post;
 import com.example.malang.domain.Request;
 import com.example.malang.domain.RequestStatus;
-import com.example.malang.domain.member.Member;
-import jakarta.persistence.*;
 import lombok.*;
-
-import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
 @Setter
-public class RequestResponseDTO {
+public class RequestResponseDto {
 
     private Long id;
 
@@ -29,7 +23,7 @@ public class RequestResponseDTO {
     private Long chatRoomId;
 
 
-    public RequestResponseDTO(Request request) {
+    public RequestResponseDto(Request request) {
         this.id = request.getId();
         this.message = request.getMessage();
         this.status = request.getStatus();

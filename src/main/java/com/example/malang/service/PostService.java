@@ -5,9 +5,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.PostDetailResponseDTO;
-import com.example.malang.dto.PostRequest;
-import com.example.malang.dto.PostListResponseDTO;
+import com.example.malang.dto.PostRequestDto;
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.repository.MemberRepository;
@@ -24,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static com.example.malang.dto.PostResponseDto.*;
 
 @Service
 @RequiredArgsConstructor
@@ -51,8 +52,12 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
+    /**
+     * 코드 리팩토링
+     * 서비스에서 builder 로 만들지 말고 from() 같은 메서드 만들어서 거기 안에서 builder 로 만드세요
+     */
     @Transactional
-    public Long createPost(Long memberId, PostRequest postRequest, MultipartFile imageFile) throws IOException {
+    public Long createPost(Long memberId, PostRequestDto.PostRequest postRequest, MultipartFile imageFile) throws IOException {
         //파일의 원본 이름
         String originalFileName = imageFile.getOriginalFilename();
         //DB에 저장될 파일 이름
@@ -68,8 +73,7 @@ public class PostService {
         amazonS3Client.putObject(bucket, storeFileName, imageFile.getInputStream(), metadata);
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_USER));
-
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
 
         Place place = Place.builder()
                 .name(postRequest.getPlaceName())
