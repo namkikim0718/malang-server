@@ -31,6 +31,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// OAuth2 관리
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//JWT 의존성
+	implementation 'com.auth0:java-jwt:4.2.1'
+
+	//AWS
+	 implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
 }
 
 tasks.named('test') {
