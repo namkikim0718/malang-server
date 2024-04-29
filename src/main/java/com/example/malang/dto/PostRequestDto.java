@@ -19,10 +19,6 @@ public class PostRequestDto {
 
         private String y;
 
-        private Address address;
-
-        private int age;
-
         private int maleMembers;
 
         private int femaleMembers;
