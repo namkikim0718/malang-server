@@ -39,7 +39,7 @@ public class PostService {
     /**
      * 파일 저장 경로
      */
-    @Value("${FILE_DIR}")
+//    @Value("${FILE_DIR}")
     private String fileDir;
 
     /**
