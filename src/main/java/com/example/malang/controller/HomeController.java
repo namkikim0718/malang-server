@@ -26,7 +26,7 @@ public class HomeController {
     private final MainService mainService;
 
     /**
-     * 메인 화면 API
+     * 메인 화면 API 입니다.
      */
     @GetMapping("/")
     public ResponseEntity<BaseResponse<MainRequiredInfo>> home(Authentication authentication) {
