@@ -13,7 +13,7 @@ public class CheckController {
     @Value("${DB_USERNAME}")
     public String dbUserName;
 
-    @GetMapping("/check")
+    @GetMapping("/checks")
     public String check() {
         return "accessKey : " + accessKey + " dbUserName : " + dbUserName;
     }
