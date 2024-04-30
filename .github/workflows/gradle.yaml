@@ -45,9 +45,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            sudo docker ps
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/malang-server:latest
-            sudo docker stop malang-server:latest
-            sudo docker rm malang-server:latest
-            sudo docker run -d --log-driver=syslog -p 8080:8080 --name malang-server ${{ secrets.DOCKER_USERNAME }}/malang-server:latest
-            sudo docker image prune -f
+            docker pull ${{ secrets.DOCKER_USERNAME }}/malang-server:latest
+            docker stop $(docker ps -a -q)
+            docker run -d --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/malang-server:latest
+            docker rm $(docker ps --filter 'status=exited' -a -q)
+            docker image prune -a -f
