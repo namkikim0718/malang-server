@@ -36,7 +36,7 @@ jobs:
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t supportkim/malang-server:latest .
-          docker push ${{ secrets.DOCKER_USERNAME2 }}/malang-server:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/malang-server:latest
   
           - name: Deploy
             uses: appleboy/ssh-action@master
