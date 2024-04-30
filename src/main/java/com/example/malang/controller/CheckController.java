@@ -15,6 +15,6 @@ public class CheckController {
 
     @GetMapping("/check")
     public String check() {
-        return "accessKey: " + accessKey + " dbUserName : " + dbUserName;
+        return "accessKey : " + accessKey + " dbUserName : " + dbUserName;
     }
 }
