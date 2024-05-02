@@ -1,7 +1,6 @@
 package com.example.malang.service;
 
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.MemberResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.jwt.JwtService;
@@ -11,8 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.example.malang.dto.MemberRequestDto.*;
-import static com.example.malang.dto.MemberResponseDto.*;
+import static com.example.malang.dto.MemberRequestDto.OauthLoginMember;
+import static com.example.malang.dto.MemberResponseDto.LoginAuthenticationMember;
+import static com.example.malang.dto.MemberResponseDto.MyPage;
 
 @Service
 @RequiredArgsConstructor

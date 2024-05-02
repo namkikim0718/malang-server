@@ -1,17 +1,15 @@
 package com.example.malang.controller;
 
-import com.amazonaws.Response;
 import com.example.malang.config.BaseResponse;
-import com.example.malang.dto.MemberRequestDto;
-import com.example.malang.dto.MemberResponseDto;
 import com.example.malang.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.example.malang.dto.MemberRequestDto.*;
-import static com.example.malang.dto.MemberResponseDto.*;
+import static com.example.malang.dto.MemberRequestDto.OauthLoginMember;
+import static com.example.malang.dto.MemberResponseDto.LoginAuthenticationMember;
+import static com.example.malang.dto.MemberResponseDto.MyPage;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +21,7 @@ public class MemberController {
 
     @PostMapping("/members/sign-up")
     public ResponseEntity<BaseResponse<LoginAuthenticationMember>> signUp(@RequestBody OauthLoginMember oAuthLoginMember) {
+        log.info("{} {}", oAuthLoginMember.getMemberName(), oAuthLoginMember.getEmail());
         return ResponseEntity.ok().body(new BaseResponse<>(memberService.signUp(oAuthLoginMember)));
     }
 

@@ -1,8 +1,6 @@
 package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
-
-import com.example.malang.dto.PostRequestDto;
 import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static com.example.malang.dto.PostRequestDto.*;
+import static com.example.malang.dto.PostRequestDto.PostRequest;
 
 @RestController
 @RequiredArgsConstructor

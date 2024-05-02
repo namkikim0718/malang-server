@@ -3,7 +3,6 @@ package com.example.malang.domain.member;
 import com.example.malang.domain.ChatParticipation;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.Request;
-import com.example.malang.dto.MemberRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.malang.dto.MemberRequestDto.*;
+import static com.example.malang.dto.MemberRequestDto.OauthLoginMember;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
