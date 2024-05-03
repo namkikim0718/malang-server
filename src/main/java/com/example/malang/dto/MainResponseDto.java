@@ -1,12 +1,11 @@
 package com.example.malang.dto;
 
-import com.example.malang.domain.Post;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
-import static com.example.malang.dto.PostResponseDto.*;
+import static com.example.malang.dto.PostResponseDto.PostListResponseDTO;
 
 public class MainResponseDto {
 
