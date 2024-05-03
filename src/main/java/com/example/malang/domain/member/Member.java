@@ -28,9 +28,11 @@ public class Member {
 
     private String name;
 
-    // 이게 userId 로 될 수도 있다.
-    // 어차피 email 과 userId 가 같으니까 일단 email 로
-    private String email;
+    private String username;
+
+    private String password;
+
+    private String role;
 
     @OneToOne(mappedBy = "member", fetch = LAZY)
     private Post post;
@@ -41,21 +43,28 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<ChatParticipation> chatParticipationList = new ArrayList<>();
 
-    private String refreshToken;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * 생성 메서드
      */
-    public static Member from(OauthLoginMember oAuthLoginMember) {
-        return Member.builder()
-                .email(oAuthLoginMember.getEmail())
-                .name(oAuthLoginMember
-                        .getName())
-                .build();
-    }
+    public static Member createMember(String name, String username, String password) {
+        Member member = new Member();
+        member.name = name;
+        member.username = username;
+        member.password = password;
+        member.role = "ROLE_ADMIN";
 
-    public void updateRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken.replace("Bearer ","");
+        return member;
     }
-
 }

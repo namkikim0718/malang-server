@@ -31,7 +31,7 @@ public class Init {
         public void init() {
             Member member = Member.builder()
                     .name("malang")
-                    .email("malng@inu.ac.kr")
+                    .username("malng@inu.ac.kr")
                     .build();
             memberRepository.save(member);
         }
