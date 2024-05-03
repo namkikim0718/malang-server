@@ -1,7 +1,6 @@
 package com.example.malang.controller;
 
 import com.example.malang.domain.ChatParticipation;
-import com.example.malang.dto.ChatParticipationResponseDto;
 import com.example.malang.service.ChatParticipationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor

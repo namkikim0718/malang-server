@@ -2,7 +2,8 @@ package com.example.malang.dto;
 
 import com.example.malang.domain.Request;
 import com.example.malang.domain.RequestStatus;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

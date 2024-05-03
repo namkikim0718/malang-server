@@ -6,7 +6,6 @@ import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
 import com.example.malang.dto.PostRequestDto;
-import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.repository.MemberRepository;
@@ -24,7 +23,8 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.example.malang.dto.PostResponseDto.*;
+import static com.example.malang.dto.PostResponseDto.PostDetailResponseDTO;
+import static com.example.malang.dto.PostResponseDto.PostListResponseDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +39,7 @@ public class PostService {
     /**
      * 파일 저장 경로
      */
-    @Value("${FILE_DIR}")
+//    @Value("${FILE_DIR}")
     private String fileDir;
 
     /**

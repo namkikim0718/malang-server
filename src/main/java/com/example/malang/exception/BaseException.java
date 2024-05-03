@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import java.io.IOException;
-
 @Getter
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class BaseException extends RuntimeException {

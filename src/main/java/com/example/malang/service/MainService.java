@@ -2,9 +2,7 @@ package com.example.malang.service;
 
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
-import com.example.malang.dto.MainResponseDto;
 import com.example.malang.dto.PostResponseDto;
-import com.example.malang.repository.MemberRepository;
 import com.example.malang.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -12,9 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.example.malang.dto.MainResponseDto.*;
+import static com.example.malang.dto.MainResponseDto.MainRequiredInfo;
 
 @Service
 @RequiredArgsConstructor

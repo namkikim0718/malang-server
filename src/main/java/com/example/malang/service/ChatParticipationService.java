@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ChatParticipationService {
 
-    private final ChatParticipationRepository chatParticipationRepository;
+     private final ChatParticipationRepository chatParticipationRepository;
 
     private final MemberRepository memberRepository;
 

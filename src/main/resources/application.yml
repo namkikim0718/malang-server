@@ -19,7 +19,7 @@ spring:
         format_sql: true
 
 jwt:
-  secret: malangmalangmalangmalang
+  secret: asdskajdksjkdsakjksjfkjskfjksasjdksjadijiqwjdiqw
   access:
     expiration: 31536000
     header : Authorization

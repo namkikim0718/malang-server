@@ -1,7 +1,6 @@
 package com.example.malang.dto;
 
 import com.example.malang.domain.Post;
-import lombok.Builder;
 import lombok.Getter;
 
 public class PostResponseDto {
