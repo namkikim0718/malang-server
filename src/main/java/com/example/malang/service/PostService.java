@@ -37,12 +37,6 @@ public class PostService {
     private final AmazonS3Client amazonS3Client;
 
     /**
-     * 파일 저장 경로
-     */
-//    @Value("${FILE_DIR}")
-    private String fileDir;
-
-    /**
      * S3
      */
     @Value("${cloud.aws.s3.bucket}")
@@ -117,11 +111,4 @@ public class PostService {
         return originalFilename.substring(post + 1);
     }
 
-    public String getFullPath(String fileName) {
-        return fileDir + fileName;
-    }
-
-    public void delete(Post post) {
-        postRepository.delete(post);
-    }
 }
