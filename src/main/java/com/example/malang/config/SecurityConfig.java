@@ -1,9 +1,6 @@
 package com.example.malang.config;
 
 
-import com.example.malang.jwt.JWTFilter;
-import com.example.malang.jwt.JWTUtil;
-import com.example.malang.jwt.LoginFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +25,7 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
 
-    private final JWTUtil jwtUtil;
+//    private final JWTUtil jwtUtil;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -74,20 +71,20 @@ public class SecurityConfig {
                 .httpBasic((auth) -> auth.disable());
 
         //경로별 인가 작업
-        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/v1/members/login", "/api/v1/", "/api/v1/members/join").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated());
+//        http
+//                .authorizeHttpRequests((auth) -> auth
+//                        .requestMatchers("/api/v1/members/login", "/api/v1/", "/api/v1/members/join").permitAll()
+//                        .requestMatchers("/admin").hasRole("ADMIN")
+//                        .anyRequest().authenticated());
 
         //필터 추가
-        http
-                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
-
-        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil);
-        loginFilter.setFilterProcessesUrl("/api/v1/members/login");
-        http
-                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
+//        http
+//                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
+//
+//        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil);
+//        loginFilter.setFilterProcessesUrl("/api/v1/members/login");
+//        http
+//                .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정
         http
