@@ -18,10 +18,6 @@ public class PostResponseDto {
 
         private String memberName;
 
-        private int maleMembers;
-
-        private int femaleMembers;
-
         private String uploadFileName;
 
         private String storeFileName;
@@ -32,8 +28,6 @@ public class PostResponseDto {
             this.placeId = post.getPlace().getId();
             this.content = post.getContent();
             this.memberName = post.getMember().getName();
-            this.maleMembers = post.getMaleMembers();
-            this.femaleMembers = post.getFemaleMembers();
             this.uploadFileName = post.getUploadFileName();
             this.storeFileName = post.getStoreFileName();
         }

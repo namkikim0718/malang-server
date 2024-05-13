@@ -37,12 +37,6 @@ public class PostService {
     private final AmazonS3Client amazonS3Client;
 
     /**
-     * 파일 저장 경로
-     */
-//    @Value("${FILE_DIR}")
-    private String fileDir;
-
-    /**
      * S3
      */
     @Value("${cloud.aws.s3.bucket}")
@@ -62,9 +56,6 @@ public class PostService {
         String originalFileName = imageFile.getOriginalFilename();
         //DB에 저장될 파일 이름
         String storeFileName = createStoreFileName(originalFileName);
-
-        //실제 디렉토리에 파일로 저장
-        //imageFile.transferTo(new File(fileDir + storeFileName));
 
         //S3에 저장
         ObjectMetadata metadata = new ObjectMetadata();
@@ -117,11 +108,4 @@ public class PostService {
         return originalFilename.substring(post + 1);
     }
 
-    public String getFullPath(String fileName) {
-        return fileDir + fileName;
-    }
-
-    public void delete(Post post) {
-        postRepository.delete(post);
-    }
 }
