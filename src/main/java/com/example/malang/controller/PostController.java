@@ -6,6 +6,7 @@ import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,14 @@ import static com.example.malang.dto.PostRequestDto.PostRequest;
 public class PostController {
 
     private final PostService postService;
+
+    /**
+     * 게시글 전체 삭제
+     */
+    @DeleteMapping(value = "/posts")
+    public ResponseEntity<BaseResponse<String>> deleteAllPost() {
+        return ResponseEntity.ok().body(new BaseResponse<>(postService.deleteAll()));
+    }
 
 
     /**
