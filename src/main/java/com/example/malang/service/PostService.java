@@ -6,6 +6,7 @@ import com.example.malang.domain.Place;
 import com.example.malang.domain.Post;
 import com.example.malang.domain.member.Member;
 import com.example.malang.dto.PostRequestDto;
+import com.example.malang.dto.PostResponseDto;
 import com.example.malang.exception.BaseException;
 import com.example.malang.exception.ErrorCode;
 import com.example.malang.repository.MemberRepository;
@@ -51,7 +52,7 @@ public class PostService {
      * 테스트용 image만 받는 메서드
      */
     @Transactional
-    public Long createPostWithImage(Long memberId, MultipartFile imageFile) throws IOException {
+    public PostResponseDto.PostImageResponseDTO createPostWithImage(MultipartFile imageFile) throws IOException {
         //파일의 원본 이름
         String originalFileName = imageFile.getOriginalFilename();
         //DB에 저장될 파일 이름
@@ -63,7 +64,7 @@ public class PostService {
         metadata.setContentLength(imageFile.getSize());
         amazonS3Client.putObject(bucket, storeFileName, imageFile.getInputStream(), metadata);
 
-        return 1L;
+        return new PostResponseDto.PostImageResponseDTO(originalFileName, storeFileName);
     }
 
     /**
@@ -77,7 +78,7 @@ public class PostService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
 
-        Post post = Post.of(postRequest, place, member, "storeFileName", "originalFileName");
+        Post post = Post.of(postRequest, place, member);
 
         Post savedPost = postRepository.save(post);
         return savedPost.getId();
@@ -106,7 +107,7 @@ public class PostService {
         Place place = Place.from(postRequest);
         placeRepository.save(place);
 
-        Post post = Post.of(postRequest, place, member, storeFileName, originalFileName);
+        Post post = Post.of(postRequest, place, member);
 
         Post savedPost = postRepository.save(post);
         return savedPost.getId();
