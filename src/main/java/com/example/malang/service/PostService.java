@@ -48,6 +48,16 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
+
+    /**
+     * 전체 삭제 메서드
+     */
+    @Transactional
+    public String deleteAll() {
+        postRepository.deleteAll();
+        return "전체 삭제 완료";
+    }
+
     /**
      * 테스트용 image만 받는 메서드
      */
