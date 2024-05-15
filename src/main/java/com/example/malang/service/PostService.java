@@ -36,6 +36,7 @@ public class PostService {
     private final PlaceRepository placeRepository;
     private final AmazonS3Client amazonS3Client;
 
+
     /**
      * S3
      */
@@ -44,6 +45,42 @@ public class PostService {
 
     public Optional<Post> findById(Long postId) {
         return postRepository.findById(postId);
+    }
+
+    /**
+     * 테스트용 image만 받는 메서드
+     */
+    @Transactional
+    public Long createPostWithImage(Long memberId, MultipartFile imageFile) throws IOException {
+        //파일의 원본 이름
+        String originalFileName = imageFile.getOriginalFilename();
+        //DB에 저장될 파일 이름
+        String storeFileName = createStoreFileName(originalFileName);
+
+        //S3에 저장
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentType(imageFile.getContentType());
+        metadata.setContentLength(imageFile.getSize());
+        amazonS3Client.putObject(bucket, storeFileName, imageFile.getInputStream(), metadata);
+
+        return 1L;
+    }
+
+    /**
+     * 테스트용 json만 받는 메서드
+     */
+    @Transactional
+    public Long createPostWithJson(Long memberId, PostRequestDto.PostRequest postRequest) {
+        Place place = Place.from(postRequest);
+        placeRepository.save(place);
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
+
+        Post post = Post.of(postRequest, place, member, "storeFileName", "originalFileName");
+
+        Post savedPost = postRepository.save(post);
+        return savedPost.getId();
     }
 
     /**
@@ -65,7 +102,7 @@ public class PostService {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
-      
+
         Place place = Place.from(postRequest);
         placeRepository.save(place);
 
@@ -107,5 +144,4 @@ public class PostService {
         int post = originalFilename.lastIndexOf(".");
         return originalFilename.substring(post + 1);
     }
-
 }
