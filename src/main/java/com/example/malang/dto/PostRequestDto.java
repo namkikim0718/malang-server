@@ -20,5 +20,11 @@ public class PostRequestDto {
         private String y;
 
         private String content;
+
+        private String uploadFileName;
+
+        private String storeFileName;
+
+
     }
 }

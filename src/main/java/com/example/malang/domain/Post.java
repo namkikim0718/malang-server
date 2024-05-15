@@ -55,14 +55,14 @@ public class Post extends BaseEntity {
         this.storeFileName = storeFileName;
     }
 
-    public static Post of(PostRequestDto.PostRequest postRequest, Place place, Member member, String storeFileName, String uploadFileName) {
+    public static Post of(PostRequestDto.PostRequest postRequest, Place place, Member member) {
         return Post.builder()
                 .title(postRequest.getTitle())
                 .content(postRequest.getContent())
                 .member(member)
                 .place(place)
-                .uploadFileName(uploadFileName)
-                .storeFileName(storeFileName)
+                .uploadFileName(postRequest.getUploadFileName())
+                .storeFileName(postRequest.getStoreFileName())
                 .build();
     }
 

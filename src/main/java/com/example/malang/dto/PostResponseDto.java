@@ -55,4 +55,16 @@ public class PostResponseDto {
         }
 
     }
+
+    @Getter
+    public static class PostImageResponseDTO {
+
+        private String uploadFileName;
+        private String storeFileName;
+
+        public PostImageResponseDTO(String uploadFileName, String storeFileName) {
+            this.uploadFileName = uploadFileName;
+            this.storeFileName = storeFileName;
+        }
+    }
 }

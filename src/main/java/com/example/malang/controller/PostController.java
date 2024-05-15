@@ -1,6 +1,7 @@
 package com.example.malang.controller;
 
 import com.example.malang.config.BaseResponse;
+import com.example.malang.dto.PostRequestDto;
 import com.example.malang.dto.PostResponseDto;
 import com.example.malang.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,11 @@ public class PostController {
     /**
      * 테스트용 Image 만
      */
-    @PostMapping(value = "/testOnlyImage/members/{memberId}/post", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
+    @PostMapping(value = "/members/{memberId}/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<BaseResponse<PostResponseDto.PostImageResponseDTO>> createPostImage(@PathVariable("memberId") Long memberId,
                                                          @RequestPart("imageFile") MultipartFile imageFile
     ) throws IOException {
-        return ResponseEntity.ok().body(new BaseResponse<>(postService.createPostWithImage(memberId, imageFile)));
+        return ResponseEntity.ok().body(new BaseResponse<>(postService.createPostWithImage(imageFile)));
     }
 
 
@@ -39,10 +40,9 @@ public class PostController {
      * 테스트용 json 만
      */
 
-    @PostMapping(value = "/testOnlyJson/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
-                                                         @RequestPart("postRequest") PostRequest postRequest
-    ) throws IOException {
+    @PostMapping(value = "/members/{memberId}/post")
+    public ResponseEntity<BaseResponse<Long>> createPostJson(@PathVariable("memberId") Long memberId,
+                                                         @RequestBody PostRequestDto.PostRequest postRequest) {
         return ResponseEntity.ok().body(new BaseResponse<>(postService.createPostWithJson(memberId, postRequest)));
     }
 
@@ -50,12 +50,12 @@ public class PostController {
      * Long 이 아니라 Dto 에 감싸서 반환하는게 더 직관적일 것 같습니다.
      */
     // 게시글 생성
-    @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
-                                                         @RequestPart("postRequest") PostRequest postRequest,
-                                                         @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
-            return ResponseEntity.ok().body(new BaseResponse<>(postService.createPost(memberId, postRequest, imageFile)));
-    }
+//    @PostMapping(value = "/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+//    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
+//                                                         @RequestPart("postRequest") PostRequest postRequest,
+//                                                         @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
+//            return ResponseEntity.ok().body(new BaseResponse<>(postService.createPost(memberId, postRequest, imageFile)));
+//    }
 
 
     /**
