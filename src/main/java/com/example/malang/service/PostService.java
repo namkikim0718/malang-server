@@ -48,6 +48,42 @@ public class PostService {
     }
 
     /**
+     * 테스트용 image만 받는 메서드
+     */
+    @Transactional
+    public Long createPostWithImage(Long memberId, MultipartFile imageFile) throws IOException {
+        //파일의 원본 이름
+        String originalFileName = imageFile.getOriginalFilename();
+        //DB에 저장될 파일 이름
+        String storeFileName = createStoreFileName(originalFileName);
+
+        //S3에 저장
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentType(imageFile.getContentType());
+        metadata.setContentLength(imageFile.getSize());
+        amazonS3Client.putObject(bucket, storeFileName, imageFile.getInputStream(), metadata);
+
+        return 1L;
+    }
+
+    /**
+     * 테스트용 json만 받는 메서드
+     */
+    @Transactional
+    public Long createPostWithJson(Long memberId, PostRequestDto.PostRequest postRequest) {
+        Place place = Place.from(postRequest);
+        placeRepository.save(place);
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_MEMBER));
+
+        Post post = Post.of(postRequest, place, member, "storeFileName", "originalFileName");
+
+        Post savedPost = postRepository.save(post);
+        return savedPost.getId();
+    }
+
+    /**
      * 코드 리팩토링
      * 서비스에서 builder 로 만들지 말고 from() 같은 메서드 만들어서 거기 안에서 builder 로 만드세요
      */

@@ -25,6 +25,28 @@ public class PostController {
 
 
     /**
+     * 테스트용 Image 만
+     */
+    @PostMapping(value = "/testOnlyImage/members/{memberId}/post", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
+                                                         @RequestPart("imageFile") MultipartFile imageFile
+    ) throws IOException {
+        return ResponseEntity.ok().body(new BaseResponse<>(postService.createPostWithImage(memberId, imageFile)));
+    }
+
+
+    /**
+     * 테스트용 json 만
+     */
+
+    @PostMapping(value = "/testOnlyJson/members/{memberId}/post", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<BaseResponse<Long>> createPost(@PathVariable("memberId") Long memberId,
+                                                         @RequestPart("postRequest") PostRequest postRequest
+    ) throws IOException {
+        return ResponseEntity.ok().body(new BaseResponse<>(postService.createPostWithJson(memberId, postRequest)));
+    }
+
+    /**
      * Long 이 아니라 Dto 에 감싸서 반환하는게 더 직관적일 것 같습니다.
      */
     // 게시글 생성
