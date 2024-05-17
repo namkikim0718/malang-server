@@ -18,17 +18,17 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public List<QuestionResponse> findAllByQuestionType(QuestionRequest questionRequest){
+    public List<QuestionResponse> findAllByQuestionType(String questionType){
 
-        QuestionType questionType = QuestionType.순한맛;
+        QuestionType type = QuestionType.순한맛;
 
-        if (questionRequest.getQuestionType().equals("매운맛")) {
-            questionType = QuestionType.매운맛;
+        if (questionType.equals("매운맛")) {
+            type = QuestionType.매운맛;
         }
 
 
-        log.info("[questionType] = {}", questionType);
-        return questionRepository.findAllByQuestionType(questionType).stream()
+        log.info("[type] = {}", type);
+        return questionRepository.findAllByQuestionType(type).stream()
                 .map(question -> new QuestionResponse(question))
                 .collect(Collectors.toList());
     }
