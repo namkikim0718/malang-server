@@ -33,7 +33,7 @@ public class MemberService {
         String password = joinDTO.getName() + " " + joinDTO.getEmail();
         log.info("[join] 회원가입 성공");
         Member savedMember = memberRepository.save(Member.createMember(joinDTO.getName(), joinDTO.getEmail(), bCryptPasswordEncoder.encode(password)));
-        return new SelfJoinResponseDto(savedMember.getId() , savedMember.getUsername());
+        return new SelfJoinResponseDto(savedMember.getId() , savedMember.getUsername(),savedMember.getName());
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class MemberService {
 
         Member savedMember = memberRepository
                 .save(Member.createMember(selfJoinRequestDto.getName(), selfJoinRequestDto.getEmail(), bCryptPasswordEncoder.encode(selfJoinRequestDto.getPassword())));
-        return new SelfJoinResponseDto(savedMember.getId() , savedMember.getUsername());
+        return new SelfJoinResponseDto(savedMember.getId() , savedMember.getUsername(),savedMember.getName());
     }
 
     public SelfLoginResponseDto selfLogin(SelfLoginRequestDto selfLoginRequestDto) {
