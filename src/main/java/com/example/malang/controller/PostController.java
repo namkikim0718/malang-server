@@ -26,6 +26,14 @@ public class PostController {
     private final PostService postService;
 
     /**
+     * 게시글 단건 삭제
+     */
+    @DeleteMapping(value = "/posts/{postId}")
+    public ResponseEntity<BaseResponse<String>> deleteById(@PathVariable("postId") Long postId) {
+        return ResponseEntity.ok().body(new BaseResponse<>(postService.deleteById(postId)));
+    }
+
+    /**
      * 게시글 전체 삭제
      */
     @DeleteMapping(value = "/posts")
