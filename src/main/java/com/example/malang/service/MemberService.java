@@ -58,6 +58,6 @@ public class MemberService {
         if (!bCryptPasswordEncoder.matches(selfLoginRequestDto.getPassword(), member.getPassword())) {
             throw new BaseException(ErrorCode.NOT_MATCH_PASSWORD_MEMBER);
         }
-        return new SelfLoginResponseDto(member.getId());
+        return new SelfLoginResponseDto(member.getId(),member.getName(),member.getUsername());
     }
 }

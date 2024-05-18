@@ -8,7 +8,9 @@ public class PostResponseDto {
     @Getter
     public static class PostDetailResponseDTO {
 
-        private Long id;
+        private Long postId;
+        // 추가
+        private Long memberId;
 
         private String title;
 
@@ -23,13 +25,14 @@ public class PostResponseDto {
         private String storeFileName;
 
         public PostDetailResponseDTO(Post post) {
-            this.id = post.getId();
+            this.postId = post.getId();
             this.title = post.getTitle();
             this.placeId = post.getPlace().getId();
             this.content = post.getContent();
             this.memberName = post.getMember().getName();
             this.uploadFileName = post.getUploadFileName();
             this.storeFileName = post.getStoreFileName();
+            this.memberId = post.getMember().getId();
         }
     }
 

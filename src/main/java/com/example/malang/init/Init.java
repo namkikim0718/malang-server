@@ -36,14 +36,14 @@ public class Init {
         private final QuestionRepository questionRepository;
 
         public void init() {
-            for (int i = 0; i < 50; i++) {
-                Member member = Member.builder()
-                        .name("malang" + i)
-                        .username("malng@inu.ac.kr")
-                        .build();
-                memberRepository.save(member);
-
-            }
+//            for (int i = 0; i < 50; i++) {
+//                Member member = Member.builder()
+//                        .name("malang" + i)
+//                        .username("malng@inu.ac.kr")
+//                        .build();
+//                memberRepository.save(member);
+//
+//            }
 //            Member member = Member.builder()
 //                    .name("malang")
 //                    .username("malng@inu.ac.kr")
