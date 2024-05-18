@@ -50,6 +50,15 @@ public class PostService {
 
 
     /**
+     * 게시글 단건 삭제 메서드
+     */
+    @Transactional
+    public String deleteById(Long postId) {
+        postRepository.deleteById(postId);
+        return "게시글 삭제 완료";
+    }
+
+    /**
      * 전체 삭제 메서드
      */
     @Transactional
