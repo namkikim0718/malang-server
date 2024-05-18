@@ -94,10 +94,6 @@ public class PostService {
         return savedPost.getId();
     }
 
-    /**
-     * 코드 리팩토링
-     * 서비스에서 builder 로 만들지 말고 from() 같은 메서드 만들어서 거기 안에서 builder 로 만드세요
-     */
     @Transactional
     public Long createPost(Long memberId, PostRequestDto.PostRequest postRequest, MultipartFile imageFile) throws IOException {
         //파일의 원본 이름
