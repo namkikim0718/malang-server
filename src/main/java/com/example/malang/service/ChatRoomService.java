@@ -3,8 +3,10 @@ package com.example.malang.service;
 import com.example.malang.domain.ChatParticipation;
 import com.example.malang.domain.ChatRoom;
 import com.example.malang.domain.Request;
+import com.example.malang.domain.member.Member;
 import com.example.malang.repository.ChatParticipationRepository;
 import com.example.malang.repository.ChatRoomRepository;
+import com.example.malang.repository.MemberRepository;
 import com.example.malang.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,20 +23,26 @@ public class ChatRoomService {
 
     private final RequestRepository requestRepository;
 
+    private final MemberRepository memberRepository;
+
     private final ChatParticipationRepository chatParticipationRepository;
 
     // 채팅방 생성
     @Transactional
-    public Long createChatRoom(Long requestId) {
-        Request request = requestRepository.findById(requestId)
+    public Long createChatRoom(Long member1Id, Long member2Id) {
+        Member member1 = memberRepository.findById(member1Id)
                 .orElseThrow(() -> new RuntimeException());
 
-        ChatRoom chatRoom = ChatRoom.createChatRoom(request);
+        Member member2 = memberRepository.findById(member2Id)
+                .orElseThrow(() -> new RuntimeException());
+
+
+        ChatRoom chatRoom = new ChatRoom();
         chatRoomRepository.save(chatRoom);
         log.info("[createChatRoom] 채팅방 생성 성공");
 
-        ChatParticipation chatParticipation1 = ChatParticipation.createChatParticipation(request.getMember(), chatRoom);
-        ChatParticipation chatParticipation2 = ChatParticipation.createChatParticipation(request.getPost().getMember(), chatRoom);
+        ChatParticipation chatParticipation1 = ChatParticipation.createChatParticipation(member1, chatRoom);
+        ChatParticipation chatParticipation2 = ChatParticipation.createChatParticipation(member2, chatRoom);
 
         chatParticipationRepository.save(chatParticipation1);
         chatParticipationRepository.save(chatParticipation2);
