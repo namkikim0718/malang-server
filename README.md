@@ -1,6 +1,12 @@
 # 캡스톤 디자인
 > Since 2024.01.16
 
+## 시연 영상
+https://github.com/namkikim0718/malang-server/assets/113903598/a2322cfc-8f71-40b9-a355-5018ca4f6496
+
+
+</br></br>
+
 ## 전체 프로젝트 구조
 ![아키텍처](https://github.com/namkikim0718/malang-server/assets/113903598/49552146-9a6f-42fa-8d50-520c33a6c64b)
 
